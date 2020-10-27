@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyTunes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MyTunes" Height="450" Width="800">
     <Grid>
-        
+        <ListBox HorizontalAlignment="Left" Height="352" Margin="19,43,0,0" VerticalAlignment="Top" Width="201"/>
+
     </Grid>
 </Window>
