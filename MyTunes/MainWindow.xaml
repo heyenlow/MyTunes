@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyTunes"
         mc:Ignorable="d"
-        Title="MyTunes" Height="450" Width="800">
+        Title="MyTunes" Height="450" Width="800" Opacity="0.995">
     <Grid>
         <ListBox x:Name="PlaylistsBox" HorizontalAlignment="Left" Height="352" Margin="19,43,0,0" VerticalAlignment="Top" Width="201" SelectionChanged="ListBox_SelectionChanged">
             <ListBox.ItemTemplate>
@@ -16,7 +16,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <DataGrid x:Name="SongsBox" SelectionMode="Single" IsReadOnly="True" CanUserAddRows="False" HorizontalAlignment="Left" Height="352" Margin="235,43,0,0" VerticalAlignment="Top" Width="537" SelectionChanged="SongsBox_SelectionChanged">
+        <DataGrid x:Name="SongsBox" SelectionMode="Single" IsReadOnly="True" CanUserAddRows="False" HorizontalAlignment="Left" Height="352" Margin="235,43,0,0" VerticalAlignment="Top" Width="537" SelectionChanged="SongsBox_SelectionChanged" AutoGenerateColumns="False">
             <!--https://www.tutorialspoint.com/wpf/wpf_datagrid.htm-->
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding id}" Visibility="Hidden"/>
@@ -35,6 +35,7 @@
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>
         </DataGrid>
+        <ToolBar HorizontalAlignment="Left" Height="28" Margin="19,10,0,0" VerticalAlignment="Top" Width="147"/>
 
     </Grid>
 </Window>
