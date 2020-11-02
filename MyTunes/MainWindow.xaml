@@ -7,7 +7,15 @@
         mc:Ignorable="d"
         Title="MyTunes" Height="450" Width="800">
     <Grid>
-        <ListBox x:Name="PlaylistsBox" HorizontalAlignment="Left" Height="352" Margin="19,43,0,0" VerticalAlignment="Top" Width="201" SelectionChanged="ListBox_SelectionChanged"/>
+        <ListBox x:Name="PlaylistsBox" HorizontalAlignment="Left" Height="352" Margin="19,43,0,0" VerticalAlignment="Top" Width="201" SelectionChanged="ListBox_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <Label Content="{Binding name}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <DataGrid x:Name="SongsBox" HorizontalAlignment="Left" Height="352" Margin="235,43,0,0" VerticalAlignment="Top" Width="537" SelectionChanged="SongsBox_SelectionChanged">
             <!--https://www.tutorialspoint.com/wpf/wpf_datagrid.htm-->
             <DataGrid.Columns>

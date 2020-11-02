@@ -33,6 +33,11 @@ namespace MyTunes
             public string Genre { get; set; }
         }
 
+        public class Playlist
+        {
+            public string name { get; set; }
+        }
+
 
         private DataSet musicDataSet;
         MusicLib MusicLibrary;
@@ -50,28 +55,38 @@ namespace MyTunes
 
             MusicLibrary.PrintAllTables();
 
+            updatePlaylistBox();
+            updateAllMusicPlaylist();            
+        }
+
+        private void updatePlaylistBox()
+        {
+            List<Playlist> playlists = new List<Playlist>();
             DataTable table = musicDataSet.Tables["playlist"];
             DataRow[] results = table.Select();
             foreach (DataRow row in results)
             {
-                this.PlaylistsBox.Items.Add(row["name"].ToString());        //https://www.c-sharpcorner.com/UploadFile/mahesh/wpf-combobox/
+                playlists.Add(new Playlist { name = row["name"].ToString() });
+                //this.PlaylistsBox.Items.Add(row["name"].ToString());        //https://www.c-sharpcorner.com/UploadFile/mahesh/wpf-combobox/
             }
+            PlaylistsBox.ItemsSource = playlists;
+        }
 
-
+        //adds all songs in the song DB to the "All Songs" playlist
+        private void updateAllMusicPlaylist()
+        {
             DataTable allSongs = musicDataSet.Tables["song"];
-            results = allSongs.Select();
+            DataRow[] results = allSongs.Select();
             foreach (DataRow row in results)
             {
                 MusicLibrary.AddSongToPlaylist(Int32.Parse(row["id"].ToString()), "All Music");
             }
-
-
-            
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DataTable playlistSongs = MusicLibrary.SongsForPlaylist(PlaylistsBox.SelectedItem.ToString());
+            Playlist selectedPlaylist = PlaylistsBox.SelectedItem as Playlist;
+            DataTable playlistSongs = MusicLibrary.SongsForPlaylist(selectedPlaylist.name);
             ObservableCollection<PlaylistSong> playlistSongsCollection = new ObservableCollection<PlaylistSong>();
             DataRow[] results = playlistSongs.Select();
             foreach(DataRow row in results)
