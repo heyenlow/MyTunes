@@ -87,7 +87,7 @@ namespace MyTunes
         {
             Playlist selectedPlaylist = PlaylistsBox.SelectedItem as Playlist;
             DataTable playlistSongs = MusicLibrary.SongsForPlaylist(selectedPlaylist.name);
-            ObservableCollection<PlaylistSong> playlistSongsCollection = new ObservableCollection<PlaylistSong>();
+            List<PlaylistSong> playlistSongsCollection = new List<PlaylistSong>();
             DataRow[] results = playlistSongs.Select();
             foreach(DataRow row in results)
             {

@@ -16,11 +16,24 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <DataGrid x:Name="SongsBox" HorizontalAlignment="Left" Height="352" Margin="235,43,0,0" VerticalAlignment="Top" Width="537" SelectionChanged="SongsBox_SelectionChanged">
+        <DataGrid x:Name="SongsBox" SelectionMode="Single" IsReadOnly="True" CanUserAddRows="False" HorizontalAlignment="Left" Height="352" Margin="235,43,0,0" VerticalAlignment="Top" Width="537" SelectionChanged="SongsBox_SelectionChanged">
             <!--https://www.tutorialspoint.com/wpf/wpf_datagrid.htm-->
             <DataGrid.Columns>
-      
+                <DataGridTextColumn Binding="{Binding id}" Visibility="Hidden"/>
+                <DataGridTextColumn Binding="{Binding Title}" Header="Title"/>
+                <DataGridTextColumn Binding="{Binding Artist}" Header="Artist"/>
+                <DataGridTextColumn Binding="{Binding Album}" Header="Album"/>
+                <DataGridTextColumn Binding="{Binding Genre}" Header="Genre"/>
             </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <Border Background="AliceBlue">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Title}"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
         </DataGrid>
 
     </Grid>
