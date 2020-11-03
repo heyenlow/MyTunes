@@ -24,14 +24,19 @@
                 <DataGridTextColumn Binding="{Binding Artist}" Header="Artist"/>
                 <DataGridTextColumn Binding="{Binding Album}" Header="Album"/>
                 <DataGridTextColumn Binding="{Binding Genre}" Header="Genre"/>
+                <DataGridTextColumn Binding="{Binding AboutUrl}" Visibility="Hidden"/>
             </DataGrid.Columns>
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
                     <Border Background="AliceBlue">
                         <StackPanel>
                             <TextBlock Text="{Binding Title}"/>
-                            <TextBlock Text="{Binding AboutUrl}"/>
-                            <Image Source="{Binding AlbumImageUrl}"/>
+                            <TextBlock Text="{Binding Artist}"/>
+                            <TextBlock Text="{Binding Length}"/>
+                            <TextBlock>
+                                <Hyperlink NavigateUri="{Binding AboutUrl}" RequestNavigate="Hyperlink_RequestNavigate">About</Hyperlink>
+                            </TextBlock>
+                            <!---<Image Source="{Binding AlbumImageUrl}"/>-->
                         </StackPanel>
                     </Border>
                 </DataTemplate>

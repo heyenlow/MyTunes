@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,6 +48,7 @@ namespace MyTunes
             musicDataSet.ReadXmlSchema("music.xsd");
             musicDataSet.ReadXml("music.xml");
 
+            var task = MusicLibrary.getAPIinfoAsync();
             MusicLibrary.PrintAllTables();
 
             updatePlaylistBox();
@@ -87,19 +89,25 @@ namespace MyTunes
             DataRow[] results = playlistSongs.Select();
             foreach(DataRow row in results)
             {
-                playlistSongsCollection.Add(new Song() { Title = row["title"].ToString(), Album = row["album"].ToString(), Artist = row["artist"].ToString(), Genre = row["genre"].ToString() });
+                playlistSongsCollection.Add(new Song() { Id = Int32.Parse(row["Id"].ToString()), Title = row["title"].ToString(), Album = row["album"].ToString(), Artist = row["artist"].ToString(), Genre = row["genre"].ToString(), Length = "Length" + row["length"].ToString(), AboutUrl = row["url"].ToString() });
             }
             this.SongsBox.ItemsSource = playlistSongsCollection;
         }
         
-        private async void SongsBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void SongsBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            await MusicLibrary.getAPIinfoAsync();
+            //await MusicLibrary.getAPIinfoAsync();
         }
 
         private void playlistListBox_DragOver(object sender, DragEventArgs e)
         {
 
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)  //https://stackoverflow.com/questions/10238694/example-using-hyperlink-in-wpf
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
         }
     }
 }

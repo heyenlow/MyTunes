@@ -426,6 +426,8 @@ namespace myTunes
             table.Columns.Add("artist");
             table.Columns.Add("album");
             table.Columns.Add("genre");
+            table.Columns.Add("length");
+            table.Columns.Add("url");
 
             // Join on the song ID to create a single table
             var songs = from r1 in musicDataSet.Tables["playlist_song"].AsEnumerable()
@@ -440,7 +442,9 @@ namespace myTunes
                             Title = r2["title"],
                             Artist = r2["artist"],
                             Album = r2["album"],
-                            Genre = r2["genre"]
+                            Genre = r2["genre"],
+                            Length = r2["length"],
+                            Url = r2["url"]
                         };
 
             Console.WriteLine("Songs for playlist " + playlist + ":");
@@ -454,6 +458,8 @@ namespace myTunes
                 newRow["artist"] = s.Artist;
                 newRow["album"] = s.Album;
                 newRow["genre"] = s.Genre;
+                newRow["length"] = s.Length;
+                newRow["url"] = s.Url;
                 table.Rows.Add(newRow);
             }
 
@@ -464,13 +470,11 @@ namespace myTunes
         public async Task getAPIinfoAsync()
         {
             DataTable table = musicDataSet.Tables["song"];
-
-            // Only one row should be selected
             foreach (DataRow row in table.Select())
             {
                 Console.WriteLine(row["title"]);
 
-                var url = "http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=" + "47bbbce74aca7d78f20cb474586050e0" + "&format=json&artist=" + WebUtility.UrlEncode("artist") + "&track=" + WebUtility.UrlEncode("title");
+                var url = "http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=" + "47bbbce74aca7d78f20cb474586050e0" + "&format=json&artist=" + WebUtility.UrlEncode(row["artist"].ToString()) + "&track=" + WebUtility.UrlEncode(row["title"].ToString());
                 Console.WriteLine(url);
 
                 try
@@ -480,8 +484,11 @@ namespace myTunes
                         var json = await httpClient.GetStringAsync(url);
                         // Use JSON.Net to convert into C# object
                         dynamic jsonObj = JsonConvert.DeserializeObject(json);
-                       // row["url"] = jsonObj.track.url;
+                        row["url"] = jsonObj.track.url;
                        // row["albumImage"] = jsonObj.track.album.imagep[0]["#text"];
+                        Console.WriteLine("----------------" + row["url"].ToString());
+                        Console.WriteLine("----------------" + row["albumImage"].ToString());
+                        
                         Console.WriteLine(jsonObj.track.url);
                         Console.WriteLine(jsonObj.track.album.image[0]["#text"]);
                     }
