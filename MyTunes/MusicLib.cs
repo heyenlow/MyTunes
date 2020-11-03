@@ -428,6 +428,7 @@ namespace myTunes
             table.Columns.Add("genre");
             table.Columns.Add("length");
             table.Columns.Add("url");
+            table.Columns.Add("albumImage");
 
             // Join on the song ID to create a single table
             var songs = from r1 in musicDataSet.Tables["playlist_song"].AsEnumerable()
@@ -444,7 +445,8 @@ namespace myTunes
                             Album = r2["album"],
                             Genre = r2["genre"],
                             Length = r2["length"],
-                            Url = r2["url"]
+                            Url = r2["url"],
+                            AlbumImage = r2["albumImage"]
                         };
 
             Console.WriteLine("Songs for playlist " + playlist + ":");
@@ -460,6 +462,7 @@ namespace myTunes
                 newRow["genre"] = s.Genre;
                 newRow["length"] = s.Length;
                 newRow["url"] = s.Url;
+                newRow["albumImage"] = s.AlbumImage;
                 table.Rows.Add(newRow);
             }
 
