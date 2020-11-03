@@ -11,12 +11,12 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <Label Content="{Binding name}"/>
+                        <Label Content="{Binding name}" AllowDrop="True" DragOver="playlistListBox_DragOver"></Label>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <DataGrid x:Name="SongsBox" SelectionMode="Single" IsReadOnly="True" CanUserAddRows="False" HorizontalAlignment="Left" Height="352" Margin="235,43,0,0" VerticalAlignment="Top" Width="537" SelectionChanged="SongsBox_SelectionChanged" AutoGenerateColumns="False">
+        <DataGrid x:Name="SongsBox" SelectionMode="Single" IsReadOnly="True" CanUserAddRows="False" AllowDrop="True" HorizontalAlignment="Left" Height="352" Margin="235,43,0,0" VerticalAlignment="Top" Width="537" SelectionChanged="SongsBox_SelectionChanged" AutoGenerateColumns="False">
             <!--https://www.tutorialspoint.com/wpf/wpf_datagrid.htm-->
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding id}" Visibility="Hidden"/>
@@ -30,6 +30,8 @@
                     <Border Background="AliceBlue">
                         <StackPanel>
                             <TextBlock Text="{Binding Title}"/>
+                            <TextBlock Text="{Binding AboutUrl}"/>
+                            <Image Source="{Binding AlbumImageUrl}"/>
                         </StackPanel>
                     </Border>
                 </DataTemplate>
@@ -39,3 +41,4 @@
 
     </Grid>
 </Window>
+ 

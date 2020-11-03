@@ -26,12 +26,6 @@ namespace MyTunes
 
     public partial class MainWindow : Window
     {
-        public class PlaylistSong{
-            public string Title { get; set; }
-            public string Artist { get; set; }
-            public string Album { get; set; }
-            public string Genre { get; set; }
-        }
 
         public class Playlist
         {
@@ -57,7 +51,9 @@ namespace MyTunes
 
             updatePlaylistBox();
             updateAllMusicPlaylist();            
+
         }
+
 
         private void updatePlaylistBox()
         {
@@ -87,16 +83,21 @@ namespace MyTunes
         {
             Playlist selectedPlaylist = PlaylistsBox.SelectedItem as Playlist;
             DataTable playlistSongs = MusicLibrary.SongsForPlaylist(selectedPlaylist.name);
-            List<PlaylistSong> playlistSongsCollection = new List<PlaylistSong>();
+            List<Song> playlistSongsCollection = new List<Song>();
             DataRow[] results = playlistSongs.Select();
             foreach(DataRow row in results)
             {
-                playlistSongsCollection.Add(new PlaylistSong() { Title = row["title"].ToString(), Album = row["album"].ToString(), Artist = row["artist"].ToString(), Genre = row["genre"].ToString() });
+                playlistSongsCollection.Add(new Song() { Title = row["title"].ToString(), Album = row["album"].ToString(), Artist = row["artist"].ToString(), Genre = row["genre"].ToString() });
             }
             this.SongsBox.ItemsSource = playlistSongsCollection;
         }
+        
+        private async void SongsBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            await MusicLibrary.getAPIinfoAsync();
+        }
 
-        private void SongsBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void playlistListBox_DragOver(object sender, DragEventArgs e)
         {
 
         }

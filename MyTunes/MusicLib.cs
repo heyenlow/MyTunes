@@ -6,6 +6,10 @@ using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Data;
+using System.Net.Http;
+using System.Net;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace myTunes
 {
@@ -454,6 +458,40 @@ namespace myTunes
             }
 
             return table;
+        }
+
+        //GET API INFO
+        public async Task getAPIinfoAsync()
+        {
+            DataTable table = musicDataSet.Tables["song"];
+
+            // Only one row should be selected
+            foreach (DataRow row in table.Select())
+            {
+                Console.WriteLine(row["title"]);
+
+                var url = "http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=" + "47bbbce74aca7d78f20cb474586050e0" + "&format=json&artist=" + WebUtility.UrlEncode("artist") + "&track=" + WebUtility.UrlEncode("title");
+                Console.WriteLine(url);
+
+                try
+                {
+                    using (var httpClient = new HttpClient())
+                    {
+                        var json = await httpClient.GetStringAsync(url);
+                        // Use JSON.Net to convert into C# object
+                        dynamic jsonObj = JsonConvert.DeserializeObject(json);
+                       // row["url"] = jsonObj.track.url;
+                       // row["albumImage"] = jsonObj.track.album.imagep[0]["#text"];
+                        Console.WriteLine(jsonObj.track.url);
+                        Console.WriteLine(jsonObj.track.album.image[0]["#text"]);
+                    }
+                }
+                catch (Exception e)
+                {
+                    // Couldn't find info... song may not be in their library
+                    Console.WriteLine("API Error: " + e.Message);
+                }
+            }
         }
     }
 }
