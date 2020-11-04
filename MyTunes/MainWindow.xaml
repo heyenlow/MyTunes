@@ -29,14 +29,16 @@
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
                     <Border Background="AliceBlue">
-                        <StackPanel>
-                            <TextBlock Text="{Binding Title}"/>
-                            <TextBlock Text="{Binding Artist}"/>
-                            <TextBlock Text="{Binding Length}"/>
-                            <TextBlock>
-                                <Hyperlink NavigateUri="{Binding AboutUrl}" RequestNavigate="Hyperlink_RequestNavigate">About</Hyperlink>
-                            </TextBlock>
+                        <StackPanel Orientation="Horizontal">
                             <Image Source="{Binding AlbumImageUrl}"/>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Title}"/>
+                                <TextBlock Text="{Binding Artist}"/>
+                                <TextBlock Text="{Binding Length}"/>
+                                <TextBlock>
+                                    <Hyperlink NavigateUri="{Binding AboutUrl}" RequestNavigate="Hyperlink_RequestNavigate">About</Hyperlink>
+                                </TextBlock>
+                            </StackPanel>
                         </StackPanel>
                     </Border>
                 </DataTemplate>
