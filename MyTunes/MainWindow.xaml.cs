@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -52,7 +53,7 @@ namespace MyTunes
             MusicLibrary.PrintAllTables();
 
             updatePlaylistBox();
-            updateAllMusicPlaylist();            
+            updateAllMusicPlaylist();
 
         }
 
@@ -87,13 +88,13 @@ namespace MyTunes
             DataTable playlistSongs = MusicLibrary.SongsForPlaylist(selectedPlaylist.name);
             List<Song> playlistSongsCollection = new List<Song>();
             DataRow[] results = playlistSongs.Select();
-            foreach(DataRow row in results)
+            foreach (DataRow row in results)
             {
                 playlistSongsCollection.Add(new Song() { Id = Int32.Parse(row["Id"].ToString()), Title = row["title"].ToString(), Album = row["album"].ToString(), Artist = row["artist"].ToString(), Genre = row["genre"].ToString(), Length = "Length" + row["length"].ToString(), AboutUrl = row["url"].ToString(), AlbumImageUrl = row["albumImage"].ToString() });
             }
             this.SongsBox.ItemsSource = playlistSongsCollection;
         }
-        
+
         private void SongsBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //await MusicLibrary.getAPIinfoAsync();
@@ -101,7 +102,45 @@ namespace MyTunes
 
         private void playlistListBox_DragOver(object sender, DragEventArgs e)
         {
+                            /*
+                            Song one = e.Data as Song;
+                            dynamic results = e.Data.GetData(DataFormats.StringFormat);
+                            Console.WriteLine("Sender -- " + sender.ToString());
+                            Console.WriteLine("E      -- " + e.ToString()); 
+                            Console.WriteLine("E Data -- " + e.Data.GetData(DataFormats.StringFormat));
+                            */
 
+            // By default, don't allow dropping
+            e.Effects = DragDropEffects.None;
+
+            // If the DataObject contains string data, extract it
+            if (e.Data.GetDataPresent(DataFormats.StringFormat))
+            {
+                string dataString = (string)e.Data.GetData(DataFormats.StringFormat);
+                Console.WriteLine(dataString);
+                e.Effects = DragDropEffects.Copy;
+            }
+        
+
+        }
+
+        private void Label_Drop(object sender, DragEventArgs e)
+        {
+            DataObject a = (DataObject)e.Data;
+            Console.WriteLine("Sender -- " + sender.ToString());
+            Console.WriteLine("E      -- " + e.ToString());
+            Console.WriteLine("E Data -- " + e.Data.ToString());
+            Console.WriteLine("E OBJ  -- " + e.Data.GetDataPresent(DataFormats.StringFormat));
+
+            // If the DataObject contains string data, extract it
+            if (e.Data.GetDataPresent(DataFormats.StringFormat))
+            {
+                string dataString = (string)e.Data.GetData(DataFormats.StringFormat);
+                Label p = sender as Label;
+                Console.WriteLine(dataString);
+                Console.WriteLine("playlist " + p.Content);
+                MusicLibrary.AddSongToPlaylist(int.Parse(dataString), p.Content.ToString());
+            }
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)  //https://stackoverflow.com/questions/10238694/example-using-hyperlink-in-wpf
@@ -109,5 +148,32 @@ namespace MyTunes
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
             e.Handled = true;
         }
+
+        private Point startPoint;
+        private void SongsBox_MouseMove(object sender, MouseEventArgs e) {
+
+            // Get the current mouse position
+            Point mousePos = e.GetPosition(null);
+            Vector diff = startPoint - mousePos;
+
+            // Start the drag-drop if mouse has moved far enough
+            if(e.LeftButton == MouseButtonState.Pressed &&
+                    (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
+                     Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))                           
+            {
+                // Initiate dragging the text from the textbox
+                Song one = SongsBox.SelectedItem as Song;
+                Console.WriteLine("Selected item is: " + one.Id);
+                DragDrop.DoDragDrop(SongsBox, one.Id.ToString(), DragDropEffects.Copy);
+            }
+        }
+
+        private void SongsBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            // Store the mouse position
+            startPoint = e.GetPosition(null);
+        }
+
+        
     }
 }

@@ -7,16 +7,16 @@
         mc:Ignorable="d"
         Title="MyTunes" Height="450" Width="800" Opacity="0.995">
     <Grid>
-        <ListBox x:Name="PlaylistsBox" HorizontalAlignment="Left" Height="352" Margin="19,43,0,0" VerticalAlignment="Top" Width="201" SelectionChanged="ListBox_SelectionChanged">
+        <ListBox x:Name="PlaylistsBox" HorizontalAlignment="Left" Height="352" Margin="19,43,0,0" VerticalAlignment="Top" Width="201" DragOver="playlistListBox_DragOver" SelectionChanged="ListBox_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <Label Content="{Binding name}" AllowDrop="True" DragOver="playlistListBox_DragOver"></Label>
+                        <Label Content="{Binding name}" AllowDrop="True" Drop="Label_Drop" DragOver="playlistListBox_DragOver"></Label>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <DataGrid x:Name="SongsBox" SelectionMode="Single" IsReadOnly="True" CanUserAddRows="False" AllowDrop="True" HorizontalAlignment="Left" Height="352" Margin="235,43,0,0" VerticalAlignment="Top" Width="537" SelectionChanged="SongsBox_SelectionChanged" AutoGenerateColumns="False">
+        <DataGrid x:Name="SongsBox" SelectionMode="Single" IsReadOnly="True" CanUserAddRows="False" AllowDrop="True" HorizontalAlignment="Left" Height="352" Margin="235,43,0,0" VerticalAlignment="Top" Width="537" SelectionChanged="SongsBox_SelectionChanged" AutoGenerateColumns="False" MouseMove="SongsBox_MouseMove" PreviewMouseLeftButtonDown="SongsBox_PreviewMouseLeftButtonDown">
             <!--https://www.tutorialspoint.com/wpf/wpf_datagrid.htm-->
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding id}" Visibility="Hidden"/>
