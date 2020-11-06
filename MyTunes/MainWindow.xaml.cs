@@ -102,43 +102,29 @@ namespace MyTunes
 
         private void playlistListBox_DragOver(object sender, DragEventArgs e)
         {
-                            /*
-                            Song one = e.Data as Song;
-                            dynamic results = e.Data.GetData(DataFormats.StringFormat);
-                            Console.WriteLine("Sender -- " + sender.ToString());
-                            Console.WriteLine("E      -- " + e.ToString()); 
-                            Console.WriteLine("E Data -- " + e.Data.GetData(DataFormats.StringFormat));
-                            */
-
             // By default, don't allow dropping
             e.Effects = DragDropEffects.None;
-
+            
             // If the DataObject contains string data, extract it
-            if (e.Data.GetDataPresent(DataFormats.StringFormat))
+            if (e.Data.GetDataPresent(DataFormats.StringFormat) && !sender.ToString().Contains("All Music"))
             {
-                string dataString = (string)e.Data.GetData(DataFormats.StringFormat);
-                Console.WriteLine(dataString);
                 e.Effects = DragDropEffects.Copy;
             }
-        
-
         }
 
         private void Label_Drop(object sender, DragEventArgs e)
         {
-            DataObject a = (DataObject)e.Data;
-            Console.WriteLine("Sender -- " + sender.ToString());
-            Console.WriteLine("E      -- " + e.ToString());
-            Console.WriteLine("E Data -- " + e.Data.ToString());
-            Console.WriteLine("E OBJ  -- " + e.Data.GetDataPresent(DataFormats.StringFormat));
-
+            /*  ------------Debug------------
+             *  Console.WriteLine("Sender -- " + sender.ToString());
+             *  Console.WriteLine("E      -- " + e.ToString());
+             *  Console.WriteLine("E Data -- " + e.Data.ToString());
+             *  Console.WriteLine("E OBJ  -- " + e.Data.GetDataPresent(DataFormats.StringFormat));
+             */
             // If the DataObject contains string data, extract it
             if (e.Data.GetDataPresent(DataFormats.StringFormat))
             {
                 string dataString = (string)e.Data.GetData(DataFormats.StringFormat);
                 Label p = sender as Label;
-                Console.WriteLine(dataString);
-                Console.WriteLine("playlist " + p.Content);
                 MusicLibrary.AddSongToPlaylist(int.Parse(dataString), p.Content.ToString());
             }
         }

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MyTunes" Height="450" Width="800" Opacity="0.995">
     <Grid>
-        <ListBox x:Name="PlaylistsBox" HorizontalAlignment="Left" Height="352" Margin="19,43,0,0" VerticalAlignment="Top" Width="201" DragOver="playlistListBox_DragOver" SelectionChanged="ListBox_SelectionChanged">
+        <ListBox x:Name="PlaylistsBox" HorizontalAlignment="Left" Height="352" Margin="19,43,0,0" VerticalAlignment="Top" Width="201" SelectionChanged="ListBox_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
