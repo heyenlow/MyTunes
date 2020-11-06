@@ -3,9 +3,12 @@
 Completed the Procrastination Portion.
 
 Still left to be done:
-- API
-- Drag and Drop
-- Context Menu
-- Play Pause
-- Toolbar (add song, playlist, about)
+- Context Menu (8)
+- Play Pause (4)
+- Toolbar (5)
+    - add song (6)
+    - playlist (7)
+    - about (12)
 - Icons
+- save (9)
+- stretch (11)
