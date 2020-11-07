@@ -39,11 +39,12 @@ namespace MyTunes
 
         private DataSet musicDataSet;
         MusicLib MusicLibrary;
+        MediaPlayer mediaPlayer;
         public MainWindow()
         {
             InitializeComponent();
 
-
+            mediaPlayer = new MediaPlayer();
             MusicLibrary = new MusicLib();
 
             //Pulled from Notes -> https://sites.harding.edu/fmccown/classes/comp4450-f20/notes/notes16.html        
@@ -162,27 +163,32 @@ namespace MyTunes
             startPoint = e.GetPosition(null);
         }
 
-        private void Open_Click(object sender, RoutedEventArgs e)
-        {
+        //private void Open_Click(object sender, RoutedEventArgs e)
+        //{
             
-            OpenFileDialog openFile = new OpenFileDialog();
-            openFile.Filter = "*.mp3 | *.m4a | *.wma | *.wav";
-            if (openFile.ShowDialog() == true)
-            {
-                MusicLibrary.AddSong(openFile.FileName);    
-            }
-        }
+        //    OpenFileDialog openFile = new OpenFileDialog();
+        //    openFile.Filter = "*.mp3 | *.m4a | *.wma | *.wav";
+        //    if (openFile.ShowDialog() == true)
+        //    {
+        //        MusicLibrary.AddSong(openFile.FileName);    
+        //    }
+        //}
 
-        private void Playlist_Click(object sender, RoutedEventArgs e)
-        {
-            AddPlaylist addPlaylist = new AddPlaylist();
-            addPlaylist.ShowDialog();
-        }
+        //private void Playlist_Click(object sender, RoutedEventArgs e)
+        //{
+        //    AddPlaylist addPlaylist = new AddPlaylist();
+        //    addPlaylist.ShowDialog();
+        //}
 
-        private void About_Click(object sender, RoutedEventArgs e)
-        {
-            AboutForm about = new AboutForm();
-            about.ShowDialog();
-        }
+        //private void About_Click(object sender, RoutedEventArgs e)
+        //{
+        //    AboutForm about = new AboutForm();
+        //    about.ShowDialog();
+        //}
+
+        //private void Play_Click(object sender, RoutedEventArgs e)
+        //{
+
+        //}
     }
 }
