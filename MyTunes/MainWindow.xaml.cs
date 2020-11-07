@@ -1,4 +1,5 @@
-﻿using myTunes;
+﻿using Microsoft.Win32;
+using myTunes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -160,6 +161,23 @@ namespace MyTunes
             startPoint = e.GetPosition(null);
         }
 
-        
+        private void Open_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+            if(openFile.ShowDialog() == true)
+            {
+
+            }
+        }
+
+        private void Playlist_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void About_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

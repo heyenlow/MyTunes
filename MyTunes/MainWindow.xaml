@@ -7,6 +7,12 @@
         mc:Ignorable="d"
         Title="MyTunes" Height="450" Width="800" Opacity="0.995">
     <Grid>
+        <Grid.ContextMenu>
+            <ContextMenu>
+                <MenuItem Command="Play"> </MenuItem>
+                <MenuItem Command="Delete"></MenuItem>
+            </ContextMenu>
+        </Grid.ContextMenu>
         <ListBox x:Name="PlaylistsBox" HorizontalAlignment="Left" Height="352" Margin="19,43,0,0" VerticalAlignment="Top" Width="201" SelectionChanged="ListBox_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -44,7 +50,14 @@
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>
         </DataGrid>
-        <ToolBar HorizontalAlignment="Left" Height="28" Margin="19,10,0,0" VerticalAlignment="Top" Width="147"/>
+        <ToolBar HorizontalAlignment="Left" Height="28" Margin="19,10,0,0" VerticalAlignment="Top" Width="753">
+            <Button x:Name="Open" Click="Open_Click">
+                <Image Source="file.png" Height="18" Width="35" RenderTransformOrigin="0.743,0.5"></Image>
+            </Button>
+            <Button x:Name="Playlist" Click="Playlist_Click">
+                <Image Source="Music.png"></Image>
+            </Button>
+        </ToolBar>
 
     </Grid>
 </Window>
