@@ -163,32 +163,32 @@ namespace MyTunes
             startPoint = e.GetPosition(null);
         }
 
-        //private void Open_Click(object sender, RoutedEventArgs e)
-        //{
-            
-        //    OpenFileDialog openFile = new OpenFileDialog();
-        //    openFile.Filter = "*.mp3 | *.m4a | *.wma | *.wav";
-        //    if (openFile.ShowDialog() == true)
-        //    {
-        //        MusicLibrary.AddSong(openFile.FileName);    
-        //    }
-        //}
+        private void Open_Click(object sender, RoutedEventArgs e)
+        {
 
-        //private void Playlist_Click(object sender, RoutedEventArgs e)
-        //{
-        //    AddPlaylist addPlaylist = new AddPlaylist();
-        //    addPlaylist.ShowDialog();
-        //}
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.Filter = "*.mp3 | *.m4a | *.wma | *.wav";
+            if (openFile.ShowDialog() == true)
+            {
+                MusicLibrary.AddSong(openFile.FileName);
+            }
+        }
 
-        //private void About_Click(object sender, RoutedEventArgs e)
-        //{
-        //    AboutForm about = new AboutForm();
-        //    about.ShowDialog();
-        //}
+        private void Playlist_Click(object sender, RoutedEventArgs e)
+        {
+            AddPlaylist addPlaylist = new AddPlaylist();
+            addPlaylist.ShowDialog();
+        }
 
-        //private void Play_Click(object sender, RoutedEventArgs e)
-        //{
+        private void About_Click(object sender, RoutedEventArgs e)
+        {
+            AboutForm about = new AboutForm();
+            about.ShowDialog();
+        }
 
-        //}
+        private void Play_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

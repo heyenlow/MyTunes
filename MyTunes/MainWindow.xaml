@@ -46,7 +46,7 @@
             </DataGrid.RowDetailsTemplate>
         </DataGrid>
         <ToolBar HorizontalAlignment="Left" Height="28" Margin="19,10,0,0" VerticalAlignment="Top" Width="753">
-            <!--<Button x:Name="Open" Click="Open_Click">
+            <Button x:Name="Open" Click="Open_Click">
                 <Image Source="file.png" Height="18" Width="35" RenderTransformOrigin="0.743,0.5"></Image>
             </Button>
             <Button x:Name="addPlaylist" Click="Playlist_Click">
@@ -54,9 +54,9 @@
             </Button>
             <Button x:Name="About" Click="About_Click">
                 <Image Source="Info.png" Width="33" Height="19"></Image>
-            </Button>-->
+            </Button>
         </ToolBar>
-        <!--<Button x:Name="Play" Content="Play" HorizontalAlignment="Left" Margin="235,380,0,0" VerticalAlignment="Top" Width="75" Click="Play_Click"/>-->
+        <Button x:Name="Play" Content="Play" HorizontalAlignment="Left" Margin="235,380,0,0" VerticalAlignment="Top" Width="75" Click="Play_Click"/>
         <Button x:Name="Stop" Content="Stop" HorizontalAlignment="Left" Margin="343,380,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
