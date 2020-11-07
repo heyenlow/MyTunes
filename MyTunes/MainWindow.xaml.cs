@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -164,7 +165,8 @@ namespace MyTunes
         private void Open_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFile = new OpenFileDialog();
-            if(openFile.ShowDialog() == true)
+            openFile.Filter = "*.mp3 | *.m4a | *.wma | *.wav";
+            if (openFile.ShowDialog() == true)
             {
 
             }
@@ -172,7 +174,22 @@ namespace MyTunes
 
         private void Playlist_Click(object sender, RoutedEventArgs e)
         {
+            AddPlaylist addPlaylist = new AddPlaylist();
+            if(addPlaylist.ShowDialog()==true)
+            {
+
+            }
             
+            //DataRow thing;
+            //DataTable table = musicDataSet.Tables["playlist"];
+            //DataRow[] results = table.Select();
+            //foreach (DataRow Line in results)
+            //{
+            //    if(Line == thing)
+            //    {
+
+            //    }
+            //}
         }
 
         private void About_Click(object sender, RoutedEventArgs e)

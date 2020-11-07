@@ -8,7 +8,6 @@ Completed the Procrastination Portion.
 - Toolbar (5)
     - add song (6)
     - playlist (7)
-    - about (12)
 - Icons
 - save (9)
 - stretch (11)
@@ -16,5 +15,5 @@ Completed the Procrastination Portion.
 **Known Bugs**
 
 **Work Percentage**
-Konrad Heyen -
+Konrad Heyen - 
 Campbell Walters - 

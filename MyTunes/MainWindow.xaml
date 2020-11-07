@@ -9,7 +9,7 @@
     <Grid>
         <Grid.ContextMenu>
             <ContextMenu>
-                <MenuItem Command="Play"> </MenuItem>
+                <MenuItem Command="Play"></MenuItem>
                 <MenuItem Command="Delete"></MenuItem>
             </ContextMenu>
         </Grid.ContextMenu>
@@ -54,8 +54,11 @@
             <Button x:Name="Open" Click="Open_Click">
                 <Image Source="file.png" Height="18" Width="35" RenderTransformOrigin="0.743,0.5"></Image>
             </Button>
-            <Button x:Name="Playlist" Click="Playlist_Click">
-                <Image Source="Music.png"></Image>
+            <Button x:Name="addPlaylist" Click="Playlist_Click">
+                <Image Source="Music.png" Width="28"></Image>
+            </Button>
+            <Button x:Name="About" Click="About_Click">
+                <Image Source="Info.png" Width="33" Height="19"></Image>
             </Button>
         </ToolBar>
 
