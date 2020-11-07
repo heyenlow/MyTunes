@@ -164,32 +164,19 @@ namespace MyTunes
 
         private void Open_Click(object sender, RoutedEventArgs e)
         {
+            
             OpenFileDialog openFile = new OpenFileDialog();
             openFile.Filter = "*.mp3 | *.m4a | *.wma | *.wav";
             if (openFile.ShowDialog() == true)
             {
-
+                MusicLibrary.AddSong(openFile.FileName);    
             }
         }
 
         private void Playlist_Click(object sender, RoutedEventArgs e)
         {
             AddPlaylist addPlaylist = new AddPlaylist();
-            if(addPlaylist.ShowDialog()==true)
-            {
-
-            }
-            
-            //DataRow thing;
-            //DataTable table = musicDataSet.Tables["playlist"];
-            //DataRow[] results = table.Select();
-            //foreach (DataRow Line in results)
-            //{
-            //    if(Line == thing)
-            //    {
-
-            //    }
-            //}
+            addPlaylist.ShowDialog();
         }
 
         private void About_Click(object sender, RoutedEventArgs e)
