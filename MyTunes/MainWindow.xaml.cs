@@ -194,7 +194,8 @@ namespace MyTunes
 
         private void About_Click(object sender, RoutedEventArgs e)
         {
-
+            AboutForm about = new AboutForm();
+            about.ShowDialog();
         }
     }
 }

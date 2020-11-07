@@ -1,4 +1,5 @@
-﻿using System;
+﻿using myTunes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,7 @@ namespace MyTunes
     /// </summary>
     public partial class AddPlaylist : Window
     {
+        MusicLib musicLib = new MusicLib();
         public AddPlaylist()
         {
             InitializeComponent();
@@ -26,7 +28,16 @@ namespace MyTunes
 
         private void OK_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
+            if(musicLib.PlaylistExists(PlaylistName.Text)==false)
+            {
+                musicLib.AddPlaylist(PlaylistName.Text);
+                this.DialogResult = true;
+            }
+            else 
+            {
+                MessageBox.Show("That Playlist already exists");
+                this.DialogResult = false;
+            }
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)

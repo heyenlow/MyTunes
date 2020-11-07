@@ -7,7 +7,6 @@ Completed the Procrastination Portion.
 - Play Pause (4)
 - Toolbar (5)
     - add song (6)
-    - playlist (7)
 - Icons
 - save (9)
 - stretch (11)
