@@ -16,27 +16,27 @@ using System.Windows.Shapes;
 namespace MyTunes
 {
     /// <summary>
-    /// Interaction logic for AddPlaylist.xaml
+    /// Interaction logic for RenameWindow.xaml
     /// </summary>
-    public partial class AddPlaylist : Window
+    public partial class RenameWindow : Window
     {
         MusicLib musicLib = new MusicLib();
-        public string temp;
+        
 
-        public string Temp{get; set;}
-        public AddPlaylist()
+        public string Temp { get; set; }
+        public RenameWindow()
         {
             InitializeComponent();
         }
 
         private void OK_Click(object sender, RoutedEventArgs e)
         {
-            if(musicLib.PlaylistExists(PlaylistName.Text)==false && PlaylistName.Text !="")
+            if (musicLib.PlaylistExists(named.Text) == false && named.Text != "")
             {
-                Temp = PlaylistName.Text;
+                Temp = named.Text;
                 this.DialogResult = true;
             }
-            else 
+            else
             {
                 MessageBox.Show("That Playlist already exists");
                 this.DialogResult = false;

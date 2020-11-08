@@ -39,6 +39,7 @@ namespace MyTunes
         public string TempPlay;
         MusicLib MusicLibrary;
         MediaPlayer mediaPlayer;
+        Playlist current;
         public MainWindow()
         {
             InitializeComponent();
@@ -105,9 +106,14 @@ namespace MyTunes
                 }
                 this.SongsBox.ItemsSource = playlistSongsCollection;
                 if (selectedPlaylist.name != "All Music")
+                {
                     contextremove.Header = "Remove from playlist";
+                    current = selectedPlaylist;
+                }
                 else
+                {
                     contextremove.Header = "Remove";
+                }
             }
         }
 
@@ -205,7 +211,10 @@ namespace MyTunes
             {
                 MusicLibrary.AddPlaylist(addPlaylist.Temp);
                 MusicLibrary.Save();
+                PlaylistsBox.InvalidateArrange();
+                PlaylistsBox.UpdateLayout();
                 updatePlaylistBox();
+                updateAllMusicPlaylist();
             }
         }
 
@@ -235,15 +244,47 @@ namespace MyTunes
 
         private void contextremove_Click(object sender, RoutedEventArgs e)
         {
+            Song temp = SongsBox.SelectedItem as Song;
             if (contextremove.Header == "Remove")
             {
-
+                RemoveForm remove = new RemoveForm();
+                if(remove.ShowDialog()==true)
+                {
+                    MusicLibrary.DeleteSong(temp.Id);
+                }
             }
             else
             {
-                Song temp = SongsBox.SelectedItem as Song;
-               
-              //  MusicLibrary.RemoveSongFromPlaylist(SongsBox.SelectedIndex, temp.Id, );
+                 MusicLibrary.RemoveSongFromPlaylist(SongsBox.SelectedIndex, temp.Id, current.name);
+                //  CollectionViewSource.GetDefaultView(SongsBox.ItemsSource).Refresh();
+            }
+                SongsBox.InvalidateArrange();
+                SongsBox.UpdateLayout();
+            updatePlaylistBox();
+            updateAllMusicPlaylist();
+        }
+
+        private void Playremove_Click(object sender, RoutedEventArgs e)
+        {
+            MusicLibrary.DeletePlaylist(current.name);
+            PlaylistsBox.InvalidateArrange();
+            PlaylistsBox.UpdateLayout();
+            updatePlaylistBox();
+            updateAllMusicPlaylist();
+        }
+
+        private void PlaylistPlay_Click(object sender, RoutedEventArgs e)
+        {
+            RenameWindow rename = new RenameWindow();
+            if(rename.ShowDialog()==true)
+            {
+                if (MusicLibrary.RenamePlaylist(current.name, rename.Temp))
+                {
+                    PlaylistsBox.InvalidateArrange();
+                    PlaylistsBox.UpdateLayout();
+                    updatePlaylistBox();
+                    updateAllMusicPlaylist();
+                }
             }
         }
     }

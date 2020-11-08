@@ -16,6 +16,12 @@
         </Grid.RowDefinitions>
         
         <ListBox x:Name="PlaylistsBox" Grid.Row="1" MinHeight="330" HorizontalAlignment="Left" Height="auto" Margin="19,5,0,0" VerticalAlignment="Top" Width="200" SelectionChanged="ListBox_SelectionChanged" >
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Name="PlaylistPlay" Header="Rename" Click="PlaylistPlay_Click"></MenuItem>
+                    <MenuItem Name="Playremove" Header="Remove" Click="Playremove_Click" ></MenuItem>
+                </ContextMenu>
+            </ListBox.ContextMenu>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
