@@ -28,6 +28,7 @@
                 <DataGridTextColumn Binding="{Binding Album}" Header="Album"/>
                 <DataGridTextColumn Binding="{Binding Genre}" Header="Genre"/>
                 <DataGridTextColumn Binding="{Binding AboutUrl}" Visibility="Hidden"/>
+                <DataGridTextColumn Binding="{Binding Filename}" Visibility="Hidden"/>
             </DataGrid.Columns>
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
