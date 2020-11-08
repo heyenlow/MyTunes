@@ -4,7 +4,6 @@ Completed the Procrastination Portion.
 
 **Still left to be done:**
 - Context Menu (8)
-- Add Playlists Refresh
 - Pick one of 3
 
 **Known Bugs**
