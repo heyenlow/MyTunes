@@ -106,6 +106,10 @@ namespace MyTunes
                     playlistSongsCollection.Add(new Song() { Id = Int32.Parse(row["Id"].ToString()), Title = row["title"].ToString(), Album = row["album"].ToString(), Artist = row["artist"].ToString(), Genre = row["genre"].ToString(), Length = "Length" + row["length"].ToString(), AboutUrl = row["url"].ToString(), AlbumImageUrl = row["albumImage"].ToString(), Filename = row["filename"].ToString() });
                 }
                 this.SongsBox.ItemsSource = playlistSongsCollection;
+                if (selectedPlaylist.name != "All Music")
+                    contextremove.Header = "Remove from playlist";
+                else
+                    contextremove.Header = "Remove";
             }
         }
 
@@ -223,6 +227,26 @@ namespace MyTunes
         {
             mediaPlayer.Stop();
             Stop.IsEnabled = false;
+        }
+
+        private void contextPlay_Click(object sender, RoutedEventArgs e)
+        {
+            mediaPlayer.Play();
+            Stop.IsEnabled = true;
+        }
+
+        private void contextremove_Click(object sender, RoutedEventArgs e)
+        {
+            if (contextremove.Header == "Remove")
+            {
+
+            }
+            else
+            {
+                Song temp = SongsBox.SelectedItem as Song;
+               
+              //  MusicLibrary.RemoveSongFromPlaylist(SongsBox.SelectedIndex, temp.Id, );
+            }
         }
     }
 }
