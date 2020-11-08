@@ -37,7 +37,6 @@ namespace MyTunes
         }
 
         public string TempPlay;
-        private DataSet musicDataSet;
         MusicLib MusicLibrary;
         MediaPlayer mediaPlayer;
         public MainWindow()
@@ -48,9 +47,6 @@ namespace MyTunes
             MusicLibrary = new MusicLib();
 
             //Pulled from Notes -> https://sites.harding.edu/fmccown/classes/comp4450-f20/notes/notes16.html        
-            musicDataSet = new DataSet();
-            musicDataSet.ReadXmlSchema("music.xsd");
-            musicDataSet.ReadXml("music.xml");
 
             var task = MusicLibrary.getAPIinfoAsync();
             MusicLibrary.PrintAllTables();
@@ -71,6 +67,7 @@ namespace MyTunes
 
         private void updatePlaylistBox()
         {
+            DataSet musicDataSet = MusicLibrary.getDataSet();
             List<Playlist> playlists = new List<Playlist>();
             DataTable table = musicDataSet.Tables["playlist"];
             DataRow[] results = table.Select();
@@ -85,6 +82,7 @@ namespace MyTunes
         //adds all songs in the song DB to the "All Songs" playlist
         private void updateAllMusicPlaylist()
         {
+            DataSet musicDataSet = MusicLibrary.getDataSet();
             DataTable allSongs = musicDataSet.Tables["song"];
             DataRow[] results = allSongs.Select();
             foreach (DataRow row in results)

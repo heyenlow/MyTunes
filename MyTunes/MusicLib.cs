@@ -17,6 +17,7 @@ namespace myTunes
     class MusicLib
     {
         private DataSet musicDataSet;
+        public DataSet getDataSet() { return musicDataSet; }
 
         public const string XML_MUSICFILE = "music.xml";
         public const string XSD_MUSICFILE = "music.xsd";

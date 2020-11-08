@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyTunes"
         mc:Ignorable="d"
-        Title="MyTunes" Height="450" Width="800" Opacity="0.995" Icon="musicnotes.jpg">
+        Title="MyTunes" Height="450" MinHeight="450" Width="800" MinWidth="800" Opacity="0.995" Icon="musicnotes.jpg">
     
     <Grid>
 
@@ -15,7 +15,7 @@
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         
-        <ListBox x:Name="PlaylistsBox" Grid.Row="1" HorizontalAlignment="Left" Height="auto" Margin="19,5,0,0" VerticalAlignment="Top" Width="200" SelectionChanged="ListBox_SelectionChanged" >
+        <ListBox x:Name="PlaylistsBox" Grid.Row="1" MinHeight="330" HorizontalAlignment="Left" Height="auto" Margin="19,5,0,0" VerticalAlignment="Top" Width="200" SelectionChanged="ListBox_SelectionChanged" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -25,7 +25,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         
-        <DataGrid x:Name="SongsBox" Grid.Row="1" SelectionMode="Single" IsReadOnly="True" CanUserAddRows="False" AllowDrop="True" HorizontalAlignment="Left" Height="auto" Margin="235,5,0,0" VerticalAlignment="Top" Width="auto" SelectionChanged="SongsBox_SelectionChanged" AutoGenerateColumns="False" MouseMove="SongsBox_MouseMove" PreviewMouseLeftButtonDown="SongsBox_PreviewMouseLeftButtonDown">
+        <DataGrid x:Name="SongsBox" Grid.Row="1" MinHeight="330" MinWidth="550" SelectionMode="Single" IsReadOnly="True" CanUserAddRows="False" AllowDrop="True" HorizontalAlignment="Left" Height="auto" Margin="235,5,0,0" VerticalAlignment="Top" Width="auto" SelectionChanged="SongsBox_SelectionChanged" AutoGenerateColumns="False" MouseMove="SongsBox_MouseMove" PreviewMouseLeftButtonDown="SongsBox_PreviewMouseLeftButtonDown">
             <!--https://www.tutorialspoint.com/wpf/wpf_datagrid.htm-->
             <DataGrid.ContextMenu>
                 <ContextMenu>
