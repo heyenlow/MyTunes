@@ -109,9 +109,12 @@ namespace MyTunes
         private void SongsBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Song temp = SongsBox.SelectedItem as Song;
-            Console.WriteLine(temp.Filename);
-            mediaPlayer.Open(new Uri(temp.Filename));
-            Play.IsEnabled = true;
+            if (temp != null)
+            {
+                Console.WriteLine("Selected Song Filename: " + temp.Filename);
+                mediaPlayer.Open(new Uri(temp.Filename));
+                Play.IsEnabled = true;
+            }
             //await MusicLibrary.getAPIinfoAsync();
         }
 
