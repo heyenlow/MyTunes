@@ -36,7 +36,7 @@ namespace MyTunes
             public string name { get; set; }
         }
 
-
+        public string TempPlay;
         private DataSet musicDataSet;
         MusicLib MusicLibrary;
         MediaPlayer mediaPlayer;
@@ -57,11 +57,18 @@ namespace MyTunes
 
             updatePlaylistBox();
             updateAllMusicPlaylist();
+            Play.IsEnabled = false;
+            Stop.IsEnabled = false;
 
         }
 
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            MusicLibrary.Save();
+        }
 
-        private void updatePlaylistBox()
+
+            private void updatePlaylistBox()
         {
             List<Playlist> playlists = new List<Playlist>();
             DataTable table = musicDataSet.Tables["playlist"];
@@ -100,6 +107,9 @@ namespace MyTunes
 
         private void SongsBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Song temp = (Song)sender;
+            mediaPlayer.Open(new Uri(temp.Filename));
+            Play.IsEnabled = true;
             //await MusicLibrary.getAPIinfoAsync();
         }
 
@@ -167,17 +177,23 @@ namespace MyTunes
         {
 
             OpenFileDialog openFile = new OpenFileDialog();
-            openFile.Filter = "*.mp3 | *.m4a | *.wma | *.wav";
+            openFile.Filter = "Media files | *.mp3; *.m4a; *.wma; *.wav | MP3(*.mp3) | *.mp3 | M4A(*.m4a) | *.m4a | Windows Media Audio(*.wma)| *.wma | Wave files(*.wav) | *.wav";
             if (openFile.ShowDialog() == true)
             {
                 MusicLibrary.AddSong(openFile.FileName);
+                MusicLibrary.Save();
             }
         }
 
         private void Playlist_Click(object sender, RoutedEventArgs e)
         {
             AddPlaylist addPlaylist = new AddPlaylist();
-            addPlaylist.ShowDialog();
+            if(addPlaylist.ShowDialog()==true)
+            {
+                MusicLibrary.AddPlaylist(addPlaylist.Temp);
+                MusicLibrary.Save();
+                updatePlaylistBox();
+            }
         }
 
         private void About_Click(object sender, RoutedEventArgs e)
@@ -188,7 +204,14 @@ namespace MyTunes
 
         private void Play_Click(object sender, RoutedEventArgs e)
         {
+            mediaPlayer.Play();
+            Stop.IsEnabled = true;
+        }
 
+        private void Stop_Click(object sender, RoutedEventArgs e)
+        {
+            mediaPlayer.Stop();
+            Stop.IsEnabled = false;
         }
     }
 }

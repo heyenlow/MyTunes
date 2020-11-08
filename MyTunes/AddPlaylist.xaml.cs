@@ -21,6 +21,9 @@ namespace MyTunes
     public partial class AddPlaylist : Window
     {
         MusicLib musicLib = new MusicLib();
+        public string temp;
+
+        public string Temp{get; set;}
         public AddPlaylist()
         {
             InitializeComponent();
@@ -30,7 +33,7 @@ namespace MyTunes
         {
             if(musicLib.PlaylistExists(PlaylistName.Text)==false)
             {
-                musicLib.AddPlaylist(PlaylistName.Text);
+                Temp = PlaylistName.Text;
                 this.DialogResult = true;
             }
             else 
