@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyTunes"
         mc:Ignorable="d"
-        Title="AboutForm" Height="224.5" Width="483" ResizeMode="NoResize">
+        Title="AboutForm" Height="224.5" Width="483" ResizeMode="NoResize" Icon="Info.png">
     <Grid>
         <Label Content="Add your favorite songs. Then make them into playlist so you can listen to your music." HorizontalAlignment="Left" Margin="0,129,0,0" VerticalAlignment="Top" Height="31" Width="467"/>
         <Label Content="By: Konrad Heyen and Campbell Walters" HorizontalAlignment="Left" Margin="244,49,0,0" VerticalAlignment="Top"/>
