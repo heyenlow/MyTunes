@@ -4,7 +4,6 @@ Completed the Procrastination Portion.
 
 **Still left to be done:**
 - Context Menu (8)
-- Play (4)
 - stretch (11)
 
 **Known Bugs**
