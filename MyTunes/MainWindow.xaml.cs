@@ -69,7 +69,7 @@ namespace MyTunes
         }
 
 
-            private void updatePlaylistBox()
+        private void updatePlaylistBox()
         {
             List<Playlist> playlists = new List<Playlist>();
             DataTable table = musicDataSet.Tables["playlist"];
@@ -96,14 +96,17 @@ namespace MyTunes
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Playlist selectedPlaylist = PlaylistsBox.SelectedItem as Playlist;
-            DataTable playlistSongs = MusicLibrary.SongsForPlaylist(selectedPlaylist.name);
-            List<Song> playlistSongsCollection = new List<Song>();
-            DataRow[] results = playlistSongs.Select();
-            foreach (DataRow row in results)
+            if (selectedPlaylist != null)
             {
-                playlistSongsCollection.Add(new Song() { Id = Int32.Parse(row["Id"].ToString()), Title = row["title"].ToString(), Album = row["album"].ToString(), Artist = row["artist"].ToString(), Genre = row["genre"].ToString(), Length = "Length" + row["length"].ToString(), AboutUrl = row["url"].ToString(), AlbumImageUrl = row["albumImage"].ToString(), Filename = row["filename"].ToString() });
+                DataTable playlistSongs = MusicLibrary.SongsForPlaylist(selectedPlaylist.name);
+                List<Song> playlistSongsCollection = new List<Song>();
+                DataRow[] results = playlistSongs.Select();
+                foreach (DataRow row in results)
+                {
+                    playlistSongsCollection.Add(new Song() { Id = Int32.Parse(row["Id"].ToString()), Title = row["title"].ToString(), Album = row["album"].ToString(), Artist = row["artist"].ToString(), Genre = row["genre"].ToString(), Length = "Length" + row["length"].ToString(), AboutUrl = row["url"].ToString(), AlbumImageUrl = row["albumImage"].ToString(), Filename = row["filename"].ToString() });
+                }
+                this.SongsBox.ItemsSource = playlistSongsCollection;
             }
-            this.SongsBox.ItemsSource = playlistSongsCollection;
         }
 
         private void SongsBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -167,8 +170,11 @@ namespace MyTunes
             {
                 // Initiate dragging the text from the textbox
                 Song one = SongsBox.SelectedItem as Song;
-                Console.WriteLine("Selected item is: " + one.Id);
-                DragDrop.DoDragDrop(SongsBox, one.Id.ToString(), DragDropEffects.Copy);
+                if (one != null)
+                {
+                    Console.WriteLine("Selected item is: " + one.Id);
+                    DragDrop.DoDragDrop(SongsBox, one.Id.ToString(), DragDropEffects.Copy);
+                }
             }
         }
 
