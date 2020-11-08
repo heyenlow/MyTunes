@@ -57,6 +57,7 @@ namespace MyTunes
 
             updatePlaylistBox();
             updateAllMusicPlaylist();
+            PlaylistsBox.SelectedIndex = 0;
             Play.IsEnabled = false;
             Stop.IsEnabled = false;
 
@@ -100,14 +101,15 @@ namespace MyTunes
             DataRow[] results = playlistSongs.Select();
             foreach (DataRow row in results)
             {
-                playlistSongsCollection.Add(new Song() { Id = Int32.Parse(row["Id"].ToString()), Title = row["title"].ToString(), Album = row["album"].ToString(), Artist = row["artist"].ToString(), Genre = row["genre"].ToString(), Length = "Length" + row["length"].ToString(), AboutUrl = row["url"].ToString(), AlbumImageUrl = row["albumImage"].ToString() });
+                playlistSongsCollection.Add(new Song() { Id = Int32.Parse(row["Id"].ToString()), Title = row["title"].ToString(), Album = row["album"].ToString(), Artist = row["artist"].ToString(), Genre = row["genre"].ToString(), Length = "Length" + row["length"].ToString(), AboutUrl = row["url"].ToString(), AlbumImageUrl = row["albumImage"].ToString(), Filename = row["filename"].ToString() });
             }
             this.SongsBox.ItemsSource = playlistSongsCollection;
         }
 
         private void SongsBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Song temp = (Song)sender;
+            Song temp = SongsBox.SelectedItem as Song;
+            Console.WriteLine(temp.Filename);
             mediaPlayer.Open(new Uri(temp.Filename));
             Play.IsEnabled = true;
             //await MusicLibrary.getAPIinfoAsync();
