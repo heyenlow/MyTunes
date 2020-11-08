@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:MyTunes"
         mc:Ignorable="d"
         Title="MyTunes" Height="450" Width="800" Opacity="0.995" Icon="musicnotes.jpg">
+    
     <Grid>
 
         <ListBox x:Name="PlaylistsBox" HorizontalAlignment="Left" Height="352" Margin="19,43,0,0" VerticalAlignment="Top" Width="201" SelectionChanged="ListBox_SelectionChanged" >
@@ -20,7 +21,12 @@
         
         <DataGrid x:Name="SongsBox" SelectionMode="Single" IsReadOnly="True" CanUserAddRows="False" AllowDrop="True" HorizontalAlignment="Left" Height="329" Margin="235,43,0,0" VerticalAlignment="Top" Width="537" SelectionChanged="SongsBox_SelectionChanged" AutoGenerateColumns="False" MouseMove="SongsBox_MouseMove" PreviewMouseLeftButtonDown="SongsBox_PreviewMouseLeftButtonDown">
             <!--https://www.tutorialspoint.com/wpf/wpf_datagrid.htm-->
-          
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Name="contextPlay" Header="Play" Click="contextPlay_Click"></MenuItem>
+                    <MenuItem Name="contextremove" Header="Remove" Click="contextremove_Click" ></MenuItem>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding id}" Visibility="Hidden"/>
                 <DataGridTextColumn Binding="{Binding Title}" Header="Title"/>
