@@ -69,7 +69,7 @@ namespace MyTunes
         }
 
 
-            private void updatePlaylistBox()
+        private void updatePlaylistBox()
         {
             List<Playlist> playlists = new List<Playlist>();
             DataTable table = musicDataSet.Tables["playlist"];
@@ -96,26 +96,28 @@ namespace MyTunes
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Playlist selectedPlaylist = PlaylistsBox.SelectedItem as Playlist;
-            DataTable playlistSongs = MusicLibrary.SongsForPlaylist(selectedPlaylist.name);
-            List<Song> playlistSongsCollection = new List<Song>();
-            DataRow[] results = playlistSongs.Select();
-            foreach (DataRow row in results)
+            if (selectedPlaylist != null)
             {
-                playlistSongsCollection.Add(new Song() { Id = Int32.Parse(row["Id"].ToString()), Title = row["title"].ToString(), Album = row["album"].ToString(), Artist = row["artist"].ToString(), Genre = row["genre"].ToString(), Length = "Length" + row["length"].ToString(), AboutUrl = row["url"].ToString(), AlbumImageUrl = row["albumImage"].ToString(), Filename = row["filename"].ToString() });
+                DataTable playlistSongs = MusicLibrary.SongsForPlaylist(selectedPlaylist.name);
+                List<Song> playlistSongsCollection = new List<Song>();
+                DataRow[] results = playlistSongs.Select();
+                foreach (DataRow row in results)
+                {
+                    playlistSongsCollection.Add(new Song() { Id = Int32.Parse(row["Id"].ToString()), Title = row["title"].ToString(), Album = row["album"].ToString(), Artist = row["artist"].ToString(), Genre = row["genre"].ToString(), Length = "Length" + row["length"].ToString(), AboutUrl = row["url"].ToString(), AlbumImageUrl = row["albumImage"].ToString(), Filename = row["filename"].ToString() });
+                }
+                this.SongsBox.ItemsSource = playlistSongsCollection;
             }
-            this.SongsBox.ItemsSource = playlistSongsCollection;
-            if (selectedPlaylist.name != "All Music")
-                contextremove.Header = "Remove from playlist";
-            else
-                contextremove.Header = "Remove";
         }
 
         private void SongsBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Song temp = SongsBox.SelectedItem as Song;
-            Console.WriteLine(temp.Filename);
-            mediaPlayer.Open(new Uri(temp.Filename));
-            Play.IsEnabled = true;
+            if (temp != null)
+            {
+                Console.WriteLine("Selected Song Filename: " + temp.Filename);
+                mediaPlayer.Open(new Uri(temp.Filename));
+                Play.IsEnabled = true;
+            }
             //await MusicLibrary.getAPIinfoAsync();
         }
 
@@ -168,8 +170,11 @@ namespace MyTunes
             {
                 // Initiate dragging the text from the textbox
                 Song one = SongsBox.SelectedItem as Song;
-                Console.WriteLine("Selected item is: " + one.Id);
-                DragDrop.DoDragDrop(SongsBox, one.Id.ToString(), DragDropEffects.Copy);
+                if (one != null)
+                {
+                    Console.WriteLine("Selected item is: " + one.Id);
+                    DragDrop.DoDragDrop(SongsBox, one.Id.ToString(), DragDropEffects.Copy);
+                }
             }
         }
 
@@ -218,24 +223,6 @@ namespace MyTunes
         {
             mediaPlayer.Stop();
             Stop.IsEnabled = false;
-        }
-
-        private void contextPlay_Click(object sender, RoutedEventArgs e)
-        {
-            mediaPlayer.Play();
-            Stop.IsEnabled = true;
-        }
-
-        private void contextremove_Click(object sender, RoutedEventArgs e)
-        {
-            if(contextremove.Header == "Remove")
-            {
-                
-            }
-            else
-            {
-                MusicLibrary.RemoveSongFromPlaylist();
-            }
         }
     }
 }

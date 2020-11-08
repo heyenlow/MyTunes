@@ -9,7 +9,13 @@
     
     <Grid>
 
-        <ListBox x:Name="PlaylistsBox" HorizontalAlignment="Left" Height="352" Margin="19,43,0,0" VerticalAlignment="Top" Width="201" SelectionChanged="ListBox_SelectionChanged" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        
+        <ListBox x:Name="PlaylistsBox" Grid.Row="1" HorizontalAlignment="Left" Height="auto" Margin="19,5,0,0" VerticalAlignment="Top" Width="200" SelectionChanged="ListBox_SelectionChanged" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -19,7 +25,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         
-        <DataGrid x:Name="SongsBox" SelectionMode="Single" IsReadOnly="True" CanUserAddRows="False" AllowDrop="True" HorizontalAlignment="Left" Height="329" Margin="235,43,0,0" VerticalAlignment="Top" Width="537" SelectionChanged="SongsBox_SelectionChanged" AutoGenerateColumns="False" MouseMove="SongsBox_MouseMove" PreviewMouseLeftButtonDown="SongsBox_PreviewMouseLeftButtonDown">
+        <DataGrid x:Name="SongsBox" Grid.Row="1" SelectionMode="Single" IsReadOnly="True" CanUserAddRows="False" AllowDrop="True" HorizontalAlignment="Left" Height="auto" Margin="235,5,0,0" VerticalAlignment="Top" Width="auto" SelectionChanged="SongsBox_SelectionChanged" AutoGenerateColumns="False" MouseMove="SongsBox_MouseMove" PreviewMouseLeftButtonDown="SongsBox_PreviewMouseLeftButtonDown">
             <!--https://www.tutorialspoint.com/wpf/wpf_datagrid.htm-->
             <DataGrid.ContextMenu>
                 <ContextMenu>
@@ -54,7 +60,7 @@
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>
         </DataGrid>
-        <ToolBar HorizontalAlignment="Left" Height="43" Margin="19,0,0,0" VerticalAlignment="Top" Width="753">
+        <ToolBar Grid.Row="0" HorizontalAlignment="Left" Height="43" Margin="19,0,0,0" VerticalAlignment="Top" Width="auto">
             <Button x:Name="Open" Click="Open_Click">
                 <Image Source="file.png" Height="25" Width="46" RenderTransformOrigin="0.743,0.5"></Image>
             </Button>
@@ -65,8 +71,8 @@
                 <Image Source="Info.png" Width="40" Height="30"></Image>
             </Button>
         </ToolBar>
-        <Button x:Name="Play" Content="Play" HorizontalAlignment="Left" Margin="235,380,0,0" VerticalAlignment="Top" Width="75" Click="Play_Click"/>
-        <Button x:Name="Stop" Content="Stop" HorizontalAlignment="Left" Margin="343,380,0,0" VerticalAlignment="Top" Width="75" Click="Stop_Click"/>
+        <Button Grid.Row="2" x:Name="Play" Content="Play" HorizontalAlignment="Left" Margin="235,10,0,0" VerticalAlignment="Top" Width="75" Click="Play_Click"/>
+        <Button Grid.Row="2" x:Name="Stop" Content="Stop" HorizontalAlignment="Left" Margin="343,10,0,0" VerticalAlignment="Top" Width="75" Click="Stop_Click"/>
 
     </Grid>
 </Window>
