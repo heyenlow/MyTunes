@@ -4,15 +4,11 @@ Completed the Procrastination Portion.
 
 **Still left to be done:**
 - Context Menu (8)
-- Play Pause (4)
-- Toolbar (5)
-    - add song (6)
-- Icons
-- save (9)
+- Play (4)
 - stretch (11)
 
 **Known Bugs**
 
 **Work Percentage**
-Konrad Heyen - 
-Campbell Walters - 
+Konrad Heyen - 52 
+Campbell Walters - 48 
